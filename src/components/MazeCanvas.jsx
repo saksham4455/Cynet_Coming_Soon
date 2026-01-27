@@ -456,6 +456,23 @@ export default function MazeCanvas({
         </EffectComposer>
       </Canvas>
       
+      {/* Title Overlay */}
+      <div className="absolute top-8 sm:top-12 left-0 right-0 text-center pointer-events-none z-10">
+        <h1 className="font-mono text-lg sm:text-2xl md:text-3xl font-bold tracking-wider" style={{ 
+          color: theme === 'black' ? 'white' : '#00ffff',
+          textShadow: theme === 'black' ? '0 0 10px rgba(255,255,255,0.5)' : '0 0 20px rgba(0,255,255,0.8)',
+          letterSpacing: '0.2em'
+        }}>
+          COMPLETE THE MAZE
+        </h1>
+        <p className="font-mono text-xs sm:text-sm md:text-base mt-2" style={{ 
+          color: theme === 'black' ? 'rgba(255,255,255,0.7)' : 'rgba(0,255,255,0.7)',
+          letterSpacing: '0.15em'
+        }}>
+          AND SEE WHAT'S COMING
+        </p>
+      </div>
+      
       {/* Mobile Controls Overlay Hint */}
       <div className="absolute bottom-4 sm:bottom-8 left-0 right-0 text-center pointer-events-none z-10">
         <p className="font-mono text-xs sm:text-sm" style={{ color: theme === 'black' ? 'rgba(255,255,255,0.3)' : 'rgba(0,255,255,0.5)' }}>
