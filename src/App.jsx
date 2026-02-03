@@ -7,6 +7,7 @@ import GlitchText from './components/GlitchText';
 import GameUI from './components/GameUI';
 import MiniMap from './components/MiniMap';
 import Confetti from './components/Confetti';
+import CountdownTimer from './components/CountdownTimer';
 import { soundManager } from './audio/soundManager';
 
 function App() {
@@ -229,8 +230,13 @@ function App() {
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: 0.3, type: 'spring', stiffness: 200 }}
             >
-              <GlitchText text="CYNET – COMING SOON 2026" theme={theme} />
+              <GlitchText text="MISSION COMPLETE" theme={theme} />
             </motion.div>
+            
+            {/* Countdown Timer */}
+            <div className="mt-8 sm:mt-12">
+              <CountdownTimer targetDate="2026-03-14T00:00:00" theme={theme} />
+            </div>
             
             {/* Stats Display */}
             <motion.div

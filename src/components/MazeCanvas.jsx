@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState, useMemo } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { InstancedMesh, Vector3, Quaternion, Matrix4, Color } from 'three';
-import { OrbitControls, PerspectiveCamera, Environment, Trail, Float, Sparkles } from '@react-three/drei';
+import { OrbitControls, PerspectiveCamera, Environment, Trail, Float, Sparkles, Text } from '@react-three/drei';
 import { EffectComposer, Bloom, Vignette, ChromaticAberration } from '@react-three/postprocessing';
 import { BlendFunction } from 'postprocessing';
 import * as THREE from 'three';
@@ -274,7 +274,7 @@ function Core({ position, theme }) {
 }
 
 // --- Collectible Item ---
-function Collectible({ position, theme, collected }) {
+function Collectible({ position, theme, collected, topic = 'DATA' }) {
   const meshRef = useRef(null);
   
   useFrame((state) => {
@@ -299,6 +299,18 @@ function Collectible({ position, theme, collected }) {
             roughness={0.2}
           />
         </mesh>
+        {/* Topic Label */}
+        <Text
+          position={[0, 0.4, 0]}
+          fontSize={0.12}
+          color={theme === 'black' ? '#ffffff' : '#00ffff'}
+          anchorX="center"
+          anchorY="middle"
+          outlineWidth={0.01}
+          outlineColor={theme === 'black' ? '#000000' : '#000000'}
+        >
+          {topic}
+        </Text>
       </Float>
       <pointLight distance={2} intensity={2} color={theme === 'black' ? '#ffff00' : '#ff00ff'} />
     </group>
@@ -318,6 +330,13 @@ export default function MazeCanvas({
   const [maze] = useState(() => generateMaze(11, 11)); // Generate new random maze each time
   const [playerPos, setPlayerPos] = useState({ x: maze.start[0], y: maze.start[1] });
   const [collectibles, setCollectibles] = useState(() => {
+    // Interesting tech topics for collectibles
+    const topics = [
+      'AI', 'ML', 'Blockchain', 'IoT', 'AR/VR', 
+      '5G', 'Cloud', 'Quantum', 'Crypto', 'Web3',
+      'DevOps', 'Security', 'BigData', 'Edge'
+    ];
+    
     // Generate collectibles in random path positions
     const items = [];
     const pathCells = [];
@@ -337,7 +356,11 @@ export default function MazeCanvas({
     for (let i = 0; i < numCollectibles && pathCells.length > 0; i++) {
       const randomIndex = Math.floor(Math.random() * pathCells.length);
       const cell = pathCells.splice(randomIndex, 1)[0];
-      items.push({ ...cell, collected: false });
+      items.push({ 
+        ...cell, 
+        collected: false, 
+        topic: topics[i % topics.length] 
+      });
     }
     
     return items;
@@ -362,12 +385,20 @@ export default function MazeCanvas({
 
   return (
     <div className="w-full h-screen relative" style={{ backgroundColor: theme === 'black' ? '#000000' : '#0a0014' }}>
-      {/* ENIGMA Logo on Left Side */}
-      <div className="absolute left-4 sm:left-8 top-4 sm:top-8 z-20 pointer-events-none">
+      {/* ENIGMA & JIMS Logo on Left Side */}
+      <div className="absolute left-2 sm:left-4 md:left-6 lg:left-8 top-2 sm:top-4 md:top-6 lg:top-8 z-20 pointer-events-none flex items-center gap-1.5 sm:gap-2 md:gap-3">
         <img 
           src="/Enigma_Logo.svg" 
           alt="ENIGMA" 
-          className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24"
+          className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 xl:w-24 xl:h-24"
+          style={{ 
+            opacity: 0.8
+          }}
+        />
+        <img 
+          src="/jimslogo.png" 
+          alt="JIMS" 
+          className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 xl:w-24 xl:h-24"
           style={{ 
             opacity: 0.8
           }}
@@ -428,6 +459,7 @@ export default function MazeCanvas({
             position={item} 
             theme={theme}
             collected={item.collected}
+            topic={item.topic}
           />
         ))}
         

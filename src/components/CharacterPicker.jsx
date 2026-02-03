@@ -72,16 +72,26 @@ function CarPreview() {
 export default function CharacterPicker({ onSelect }) {
   return (
     <div className="fixed inset-0 z-40 flex flex-col items-center justify-center bg-gradient-to-br from-[#0d001a] via-[#1a0033] to-black backdrop-blur-md px-4">
-      <motion.h2 
-        initial={{ opacity: 0, y: -20 }}
+      <motion.div
+        initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ type: "spring", stiffness: 100, damping: 20 }}
-        className="font-display text-xl sm:text-2xl md:text-3xl text-[#00ffff] mb-8 sm:mb-12 md:mb-16 tracking-wider flex items-center gap-2 sm:gap-3 drop-shadow-[0_0_10px_#00ffff]"
+        className="flex flex-col items-center mb-8 sm:mb-12 md:mb-16"
       >
-        <Sparkles size={20} className="sm:w-6 sm:h-6 animate-pulse text-[#ff00ff]" />
-        SELECT YOUR AVATAR
-        <Sparkles size={20} className="sm:w-6 sm:h-6 animate-pulse text-[#ff00ff]" />
-      </motion.h2>
+        <h1 className="font-display text-2xl sm:text-3xl md:text-4xl text-transparent bg-clip-text bg-gradient-to-r from-[#00ffff] via-[#ff00ff] to-[#00ffff] mb-3 sm:mb-4 tracking-wider text-center drop-shadow-[0_0_15px_#00ffff]">
+          GET READY TO ENTER THE CYNET WORLD
+        </h1>
+        <motion.h2 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+          className="font-display text-xl sm:text-2xl md:text-3xl text-[#00ffff] tracking-wider flex items-center gap-2 sm:gap-3 drop-shadow-[0_0_10px_#00ffff]"
+        >
+          <Sparkles size={20} className="sm:w-6 sm:h-6 animate-pulse text-[#ff00ff]" />
+          SELECT YOUR AVATAR
+          <Sparkles size={20} className="sm:w-6 sm:h-6 animate-pulse text-[#ff00ff]" />
+        </motion.h2>
+      </motion.div>
       
       <div className="flex flex-col sm:flex-row gap-6 sm:gap-8 md:gap-16 w-full max-w-2xl">
         <motion.div

@@ -25,41 +25,41 @@ export default function GameUI({
     <motion.div 
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ type: "spring", stiffness: 100, damping: 20 }}
-      className="absolute top-16 sm:top-32 left-4 sm:left-8 z-20 flex flex-col gap-2 sm:gap-3 font-mono text-xs sm:text-sm will-change-transform"
+      transition={{ type: "spring", stiffness: 150, damping: 30, mass: 0.8 }}
+      className="absolute top-20 sm:top-28 md:top-36 lg:top-40 left-2 sm:left-4 md:left-6 lg:left-8 z-20 flex flex-col gap-1.5 sm:gap-2 md:gap-3 font-mono text-[10px] sm:text-xs md:text-sm will-change-transform"
       style={{ color: textColor }}
     >
       {/* Timer */}
       <motion.div 
-        className="flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 border backdrop-blur-md transition-all duration-300 transform-gpu"
+        className="flex items-center gap-1.5 sm:gap-2 md:gap-3 px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 border backdrop-blur-md transition-all duration-300 transform-gpu"
         style={{ backgroundColor: bgColor, borderColor }}
         whileHover={{ scale: 1.03 }}
-        transition={{ type: "spring", stiffness: 400, damping: 17 }}
+        transition={{ type: "spring", stiffness: 400, damping: 20 }}
       >
-        <Timer size={16} className="sm:w-[18px] sm:h-[18px]" />
+        <Timer size={14} className="sm:w-4 sm:h-4 md:w-[18px] md:h-[18px]" />
         <span className="tracking-wider">{formatTime(elapsedTime)}</span>
       </motion.div>
 
       {/* Score */}
       <motion.div 
-        className="flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 border backdrop-blur-md transform-gpu"
+        className="flex items-center gap-1.5 sm:gap-2 md:gap-3 px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 border backdrop-blur-md transform-gpu"
         style={{ backgroundColor: bgColor, borderColor }}
         whileHover={{ scale: 1.03 }}
-        transition={{ type: "spring", stiffness: 400, damping: 17 }}
+        transition={{ type: "spring", stiffness: 400, damping: 20 }}
       >
-        <Trophy size={16} className="sm:w-[18px] sm:h-[18px]" />
+        <Trophy size={14} className="sm:w-4 sm:h-4 md:w-[18px] md:h-[18px]" />
         <span className="tracking-wider">{score.toLocaleString()}</span>
       </motion.div>
 
       {/* Collectibles with Progress Bar */}
       <motion.div 
-        className="flex flex-col gap-2 px-3 sm:px-4 py-2 border backdrop-blur-md min-w-[130px] sm:min-w-[150px] transform-gpu"
+        className="flex flex-col gap-1.5 sm:gap-2 px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 border backdrop-blur-md min-w-[110px] sm:min-w-[130px] md:min-w-[150px] transform-gpu"
         style={{ backgroundColor: bgColor, borderColor }}
         whileHover={{ scale: 1.03 }}
-        transition={{ type: "spring", stiffness: 400, damping: 17 }}
+        transition={{ type: "spring", stiffness: 400, damping: 20 }}
       >
-        <div className="flex items-center gap-2 sm:gap-3">
-          <Zap size={16} className="sm:w-[18px] sm:h-[18px]" />
+        <div className="flex items-center gap-1.5 sm:gap-2 md:gap-3">
+          <Zap size={14} className="sm:w-4 sm:h-4 md:w-[18px] md:h-[18px]" />
           <span className="tracking-wider">{collectibles}/{totalCollectibles}</span>
         </div>
         <div className="w-full h-1 bg-white/20 relative overflow-hidden">
@@ -78,12 +78,12 @@ export default function GameUI({
 
       {/* Moves */}
       <motion.div 
-        className="flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 border backdrop-blur-md transform-gpu"
+        className="flex items-center gap-1.5 sm:gap-2 md:gap-3 px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 border backdrop-blur-md transform-gpu"
         style={{ backgroundColor: bgColor, borderColor }}
         whileHover={{ scale: 1.03 }}
-        transition={{ type: "spring", stiffness: 400, damping: 17 }}
+        transition={{ type: "spring", stiffness: 400, damping: 20 }}
       >
-        <Target size={16} className="sm:w-[18px] sm:h-[18px]" />
+        <Target size={14} className="sm:w-4 sm:h-4 md:w-[18px] md:h-[18px]" />
         <span className="tracking-wider">{moves} MOVES</span>
       </motion.div>
     </motion.div>
